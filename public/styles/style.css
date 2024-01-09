@@ -7,8 +7,8 @@
     height: 100vh;
     background: rgb(193, 174, 238);
     background: linear-gradient(25deg,
-            rgba(193, 174, 238, 1) 50%,
-            rgba(148, 155, 233, 1) 50%);
+            rgba(148, 155, 233, 1) 50%,
+            rgb(220, 213, 235) 50%);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,10 +23,45 @@
     align-items: center;
     border-radius: 10px;
     margin-bottom: 50px;
-    margin-top: 5%;
+    margin-top: 30%;
     font-size: 1.1rem;
     color: white;
-    box-shadow: 1px 1px 0.5px 0.5px black;
+    box-shadow: 1px 1px 0.5px 0.5px gray;
+}
+
+.big-container {
+    display: flex;
+    justify-content: center;
+}
+
+.category {
+    margin-top: 40%;
+}
+
+.regular,
+.work {
+    background-color: rgb(193, 174, 238);
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 20px;
+    border-radius: 0.8rem;
+    margin-right: 50px;
+    box-shadow: 0.5px 0.5px 0.5px 0.5px gray;
+    border: none;
+}
+
+.btn1 {
+    border: none;
+    background-color: transparent;
+    font-size: 1.7rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    color: white;
 }
 
 .listItems {
@@ -34,19 +69,25 @@
     width: 400px;
     height: fit-content;
     border-radius: 5px;
-    box-shadow: 1px 1px 1px 1px black;
+    box-shadow: 1px 1px 1px 1px rgb(197, 189, 189);
 }
 
-.listItems p {
-    height: 50px;
+.item {
+    min-height: 70px;
     border-bottom: 0.2px solid gray;
-    /* text-align: center; */
+    display: flex;
+    align-items: center;
+    text-align: center;
     font-size: 1.7rem;
     margin-bottom: 0;
 }
 
+.item :last-child {
+    border: 0;
+}
 
-input[type="checkbox"] {
+
+.check {
     margin-left: 25px;
     margin-right: 30px;
     height: 20px;
@@ -69,12 +110,18 @@ input[type="text"] {
     font-size: 1.6rem;
 }
 
-button {
+.btn {
     height: 60px;
     width: 60px;
     background-color: rgb(193, 174, 238);
     border-radius: 50%;
     border: none;
     font-size: 2rem;
+    text-align: center;
+    font-weight: 900;
     color: white;
+}
+
+:checked+p {
+    text-decoration: line-through;
 }

@@ -10,28 +10,82 @@
 
 <body>
     <div class="container">
-        <div class="heading">
-            <h1 name="listTitle">
-                <%= listTitle %>
-            </h1>
-        </div>
-        <div class="listItems">
-            <% listItems.forEach(item=> { %>
-                <p>
-                    <input type="checkbox">
-                    <%= item %>
-                </p>
-                <%}); %>
-                    <div class="form">
-                        <form action="/" method="post">
-                            <input type="text" name="newList" placeholder="New Item">
-                            <button type="submit" name="list" value="<%= listTitle %>">+</button>
-                        </form>
-                    </div>
-
-
+        <div class="big-container">
+            <div class="category">
+                <div class="regular">
+                    <form action="/">
+                        <button class="btn1">Today</button>
+                    </form>
+                </div>
+                <div class="work">
+                    <form action="/work">
+                        <button class="btn1">Work</button>
+                    </form>
+                </div>
+            </div>
+            <div class="list-container">
+                <div class="heading">
+                    <h1 name="listTitle">
+                        <%= listTitle %>
+                    </h1>
+                </div>
+                <div class="listItems">
+                    <% listItems.forEach(item=> { %>
+                        <div class="item">
+                            <input type="checkbox" class="check">
+                            <p>
+                                <%= item %>
+                            </p>
+                        </div>
+                        <%}); %>
+                            <div class="form">
+                                <form action="/" method="post">
+                                    <input type="text" name="newList" placeholder="New Item">
+                                    <button type="submit" class="btn" name="list" value="<%= listTitle %>">+</button>
+                                </form>
+                            </div>
+                </div>
+            </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const checkBoxes = document.querySelectorAll('.check');
+
+            checkBoxes.forEach(checkBox => {
+                checkBox.addEventListener('change', () => {
+                    const listItem = document.querySelector('p');
+                    listItem.classList.toggle('completed', checkBox.checked);
+                    updateLocalStorage();
+                });
+            });
+
+            loadLocalStorage();
+
+            function updateLocalStorage() {
+                const items = [];
+                checkBoxes.forEach((checkBox, index) => {
+                    const listItem = checkBox.parentElement;
+                    items.push({
+                        text: listItem.querySelector('p').innerText,
+                        completed: checkBox.checked,
+                    });
+                });
+                localStorage.setItem('items', JSON.stringify(items));
+            }
+
+            function loadLocalStorage() {
+                const items = JSON.parse(localStorage.getItem('items')) || [];
+
+                items.forEach((item, index) => {
+                    checkBoxes[index].checked = item.completed;
+                    const listItem = checkBoxes[index].parentElement;
+                    listItem.classList.toggle('completed', item.completed);
+                });
+            }
+        });
+    </script>
+
 </body>
 
 </html>
